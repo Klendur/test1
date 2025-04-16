@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 
-from .forms import ExcelUploadForm, CreateTaskForm
+from .forms import ExcelUploadForm, CreateTaskForm, CreateUserForm
 import pandas as pd
 
 
@@ -22,6 +22,15 @@ def varvipealeht(request):
 class CustomLoginView(LoginView):
     template_name = 'pealeht/kasutajad/login.html'
 
+def register(request):
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # or wherever you want
+    else:
+        form = CreateUserForm()
+    return render(request, 'pealeht/kasutajad/register.html', {'form': form})
 
 
 

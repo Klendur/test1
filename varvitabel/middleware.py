@@ -14,7 +14,8 @@ class RequireLoginMiddleware:
         # Allow access to login/logout pages, admin, and static files
         allowed_paths = [
             login_url,
-            reverse('logout') if 'logout' in settings.LOGIN_URL else '/logout/',
+            reverse('logout') if    'logout' in settings.LOGIN_URL else '/logout/',
+            reverse('register'),
             '/admin/',
             '/static/',
             '/media/',

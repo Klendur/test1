@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% block content %}
+<h2>Vali töö või loo uus</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Jätka</button>
+</form>
+{% endblock %}

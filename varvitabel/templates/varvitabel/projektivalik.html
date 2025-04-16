@@ -1,0 +1,56 @@
+
+{% extends 'main.html' %}
+{% block content %}
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="tabel">
+    <div class="tabeliheader">
+        <div class="tabeliheaderkast">
+            <h5>Projekt</h5>
+        </div>
+        <div class="tabeliheaderkast">
+            <h5>Staatus</h5>
+        </div>
+    </div>
+    {% for projekt in projektivalik  %}
+    <div class="rida">
+        <div class="reakast">
+            <a>{{projekt.projekt}}</a>
+        </div>
+        <div class="reakast">
+            <a>{{projekt.staatus}}</a>
+        </div>
+        <div class="reakast">
+            <a href="{% url 'projektivaade' %}?projekt={{ projekt.projekt }}" class="btn btn-primary">Ava</a>
+        </div>
+        
+    </div>
+
+
+
+
+    {% empty %}
+    <h3>tooteid pole</h3>
+    {% endfor %}
+
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}

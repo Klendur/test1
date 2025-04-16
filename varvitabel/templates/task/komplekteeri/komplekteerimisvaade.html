@@ -1,0 +1,93 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="tabel">
+        <div class="tabeliheader">
+            <div class="tootekood-tabeliheaderkast">
+                <h5>Tootekood</h5>
+            </div>
+            <div class="peidus-tabeliheaderkast">
+                <h5>Nimetus</h5>
+            </div>
+            <div class="tabeliheaderkast">
+                <h5>Open</h5>
+            </div>
+            <div class="tabeliheaderkast">
+                <h5>Antud</h5>
+            </div>
+            <div class="tabeliheaderkast">
+                <input type="text" id="scrollInput" name="komplekteeritudkogus" value="{{ form.komplekteeritudkogus.value }}" placeholder="Sisesta">
+            </div>
+        </div>
+
+        {% for item, form in forms.items %}
+        <div class="rida">
+            <div class="tootekood-reakast">
+                <a>{{ form.instance.toode.tootekood }}</a>
+            </div>
+            <div class="peidus-reakast">
+                <a>{{ form.instance.toode.nimi }}</a>
+            </div>
+            <div class="reakast">
+                <a>{{ form.instance.kogus }}</a>
+            </div>
+            <div class="reakast">
+                <a>{{ form.instance.komplekteeritudkogus }}</a>
+            </div>
+            <div class="reakast">
+                <button type="submit" name="save_{{ form.instance.id }}">Salvesta</button>
+            </div>
+        </div>
+        {% empty %}
+        <h3>Tooteid pole</h3>
+        {% endfor %}
+    </div>
+</form>
+
+
+
+<script>
+    const input = document.getElementById('scrollInput');
+    let currentValue = parseInt(input.value) || 0;
+    
+    // Sensitivity settings
+    const baseStep = 1;
+    const maxStep = 1;
+    
+    input.addEventListener('wheel', (e) => {
+        e.preventDefault();
+    
+        const rawDelta = e.deltaY;
+        const step = Math.min(maxStep, baseStep * Math.abs(rawDelta) / 10);
+    
+        currentValue += (rawDelta < 0) ? Math.ceil(step) : -Math.ceil(step);
+    
+        input.value = currentValue;
+    });
+    
+    // Only allow valid characters: digits and one leading minus sign
+    input.addEventListener('input', () => {
+        let raw = input.value;
+    
+        // Remove invalid characters but allow leading negative
+        raw = raw.replace(/[^0-9\-]/g, '');
+    
+        // Only allow a single leading "-" if present
+        if (raw.includes('-')) {
+            const parts = raw.split('-');
+            raw = '-' + parts.join('');
+        }
+    
+        currentValue = parseInt(raw) || 0;
+        input.value = raw;
+    });
+</script>
+
+
+
+{% endblock content %}

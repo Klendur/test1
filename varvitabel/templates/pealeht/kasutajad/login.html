@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+
+
+
+
+
+
+<div class="tabel">
+
+    <h2 style="text-align: center; margin-bottom: 3%;">Login</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <!-- Display form errors -->
+        {% if form.errors %}
+            <div style="color: red;">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <!-- Username and Password Fields -->
+        <div style="display: flex; justify-content: center;">
+            <input style="width: 80%; margin: 4px;" type="text" name="username" id="{{ form.username.id_for_label }}" placeholder="Username" value="{{ form.username.value|default_if_none:'' }}">
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <input style="width: 80%; margin: 4px;" type="password" name="password" id="{{ form.password.id_for_label }}" placeholder="Password" value="{{ form.password.value|default_if_none:'' }}">
+        </div>
+        
+        <!-- Submit Button -->
+        <div style="display: flex; justify-content: center;">
+            <button type="submit" style="flex: 1; max-width: 50%; margin: 20px;">Edasi</button>
+        </div>
+    </form>
+
+
+
+
+</div>
+
+
+
+
+
+    {% endblock content %}

@@ -1,0 +1,135 @@
+
+{% extends 'main.html' %}
+{% block content %}
+
+
+<!--
+<form method="get">
+    <input type="text" name="desc" placeholder="Search product description..." value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+-->
+
+
+<a href="{% url 'export_to_excel' %}">
+    <button type="button">📤 Ekspordi Excelina</button>
+</a>
+<a href="{% url 'upload_excel' %}">
+    <button type="button">📤 Impordi excel</button>
+</a>
+
+<div class="tabel">
+    <div class="tabeliheader">
+
+        <div class="tootekood-tabeliheaderkast">
+            <h5 onclick="toggleDropdown('dropdown-tootekood')">
+                Tootekood
+            </h5>
+            <div id="dropdown-tootekood" class="dropdown-content">
+                {% if sort == 'tootekood' %}
+                    <a href="?{% if query %}desc={{ query }}&{% endif %}sort=-tootekood">Kasvav 🔼</a>
+                {% elif sort == '-tootekood' %}
+                    <a href="?{% if query %}desc={{ query }}&{% endif %}">Kahanev 🔽</a>
+                {% else %}
+                    <a href="?{% if query %}desc={{ query }}&{% endif %}sort=tootekood">Sorteeri ⇅</a>
+                {% endif %}
+                <form method="get">
+                    <div class="tabeliheader filterrow">
+                        <div>
+                            <input type="text" name="desc" placeholder="Otsi nimetuse järgi..." value="{{ query }}" style="width: 90%; padding: 5px;">
+                            {% if sort %}
+                                <input type="hidden" name="sort" value="{{ sort }}">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <button type="submit">Otsi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="tabeliheaderkast">
+            <h5 onclick="toggleDropdown('dropdown-kirjeldus')">
+                Kirjeldus
+                <div id="dropdown-kirjeldus" class="dropdown-content">
+                    {% if sort == 'kirjeldus' %}
+                        <a href="?{% if query %}desc={{ query }}&{% endif %}sort=-kirjeldus">Kasvav 🔼</a>
+                    {% elif sort == '-kirjeldus' %}
+                        <a href="?{% if query %}desc={{ query }}&{% endif %}">Kahanev 🔽</a>
+                    {% else %}
+                        <a href="?{% if query %}desc={{ query }}&{% endif %}sort=kirjeldus">Sorteeri ⇅</a>
+                    {% endif %}
+                    <form method="get">
+                        <div class="tabeliheader filterrow">
+                            <div>
+                                <input type="text" name="desc" placeholder="Otsi nimetuse järgi..." value="{{ query }}" style="width: 90%; padding: 5px;">
+                                {% if sort %}
+                                    <input type="hidden" name="sort" value="{{ sort }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <button type="submit">Otsi</button>
+                        </div>
+                    </form>
+                </div>
+            </h5>
+        </div>
+    </div>
+
+    
+    
+
+    <!-- Data -->
+    {% for toode in tooted %}
+    <div class="rida">
+        <div class="tootekood-reakast">
+            <a href="{% url 'toode_detail' toode.pk %}">{{ toode.tootekood }}</a>
+        </div>
+        <div class="reakast">
+            <a href="{% url 'toode_detail' toode.pk %}">{{ toode.nimi }}</a>
+        </div>
+    </div>
+    {% empty %}
+    <h3>Tooteid pole</h3>
+    {% endfor %}
+</div>
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; Esimene</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Tagasi</a>
+        {% else %}
+            <span class="disabled">&laquo; Esimene</span>
+            <span class="disabled">Tagasi</span>
+        {% endif %}
+
+        <span class="current">
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Edasi</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Viimane &raquo;</a>
+        {% else %}
+            <span class="disabled">Edasi</span>
+            <span class="disabled">Viimane &raquo;</span>
+        {% endif %}
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}

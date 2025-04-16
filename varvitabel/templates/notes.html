@@ -1,0 +1,200 @@
+<body>
+
+    <h2>Update Complekteeritudkogus</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Toode</th>
+                    <th>Kogus</th>
+                    <th>Komplekteeritud Kogus</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item, form in forms.items %}
+                <tr>
+                    <td>{{ form.instance.toode.tootekood }}</td>
+                    <td>{{ form.instance.toode.nimi }}</td>
+                    <td>{{ form.instance.kogus }}</td>
+                    <td>
+                        <!-- Form input field for editing the 'komplekteeritudkogus' -->
+                        {{ form.komplekteeritudkogus }}
+                    </td>
+                    <td>
+                        <!-- Save button for this specific row -->
+                        <button type="submit" name="save_{{ form.instance.id }}">Save</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- update_komplekteeritudkogus.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Complekteeritudkogus</title>
+</head>
+<body>
+
+    <h2>Update Complekteeritudkogus</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Toode</th>
+                    <th>Kogus</th>
+                    <th>Komplekteeritud Kogus</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item, form in forms.items %}
+                <tr>
+                    <td>{{ form.instance.toode.tootekood }}</td>
+                    <td>{{ form.instance.toode.nimi }}</td>
+                    <td>{{ form.kogus }}</td>
+                    <td>
+                        {{ form.komplekteeritudkogus }}  <!-- Render the form field for editing -->
+                    </td>
+                    <td><button type="submit">Save</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'main.html' %}
+{% block content %}
+
+
+
+
+
+
+
+
+
+
+<form method="POST">
+    {% csrf_token %}
+    {{ formset.management_form }}
+
+    <div>
+
+        <div>
+            <button type="submit">Save Edits</button>
+        </div>
+        
+
+
+        <div>
+            <div class="tabel">
+                <div class="tabeliheader">
+                    <div class="tabeliheaderkast">
+                        <h5>Tootekood</h5>
+                    </div>
+                    <div class="tabeliheaderkast">
+                        <h5>Nimetus</h5>
+                    </div>
+                    <div class="tabeliheaderkast">
+                        <h5>Kogus</h5>
+                    </div>
+                    <div class="tabeliheaderkast">
+                        <h5>Kogus</h5>
+                    </div>
+                </div>
+                {% for item, form in forms.items %}
+                <div class="rida">
+                    <div class="reakast">
+                        <a>{{ form.instance.toode.tootekood }}</a>
+                    </div>
+                    <div class="reakast">
+                        <a>{{ form.instance.toode.nimi }}</a>
+                    </div>
+                    <div class="reakast">
+                        <a>{{ form.instance.kogus }}</a>
+                    </div>
+                    <div class="reakast">
+                        <a>{{ form.komplekteeritudkogus }}</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+
+    
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+{% endblock content %}

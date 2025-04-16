@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+
+
+
+
+<div class="menyykast">
+    <div class="menyyrida">
+        <div class="menyyreakast">
+            <a href="{% url 'taskid' %}">Taskid</a>
+        </div>
+        <div class="menyyreakast">
+            <a href="{% url 'tooted' %}">Tooted</a>
+        </div>
+        <div class="menyyreakast">
+            <a href="{% url 'taskid' %}">Varvikoodid</a>
+        </div>
+        <div class="menyyreakast">
+            <a href="{% url 'projektid' %}">Projektid</a>
+        </div>
+        <div class="menyyreakast">
+            <a href="{% url 'taskid' %}">Komplekteeri</a>
+        </div>
+        <div class="menyyreakast">
+            <a href="{% url 'projektivalik' %}">Projekti ulevaade</a>
+        </div>
+        <div class="menyyreakast">
+            <a href="{% url 'taskid' %}">Kauba vastuvott(vaja teha)</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock content %}

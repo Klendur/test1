@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<h2>Loo uus tööülesanne</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <h4>Valitud tooted:</h4>
+    <ul>
+        {% for item in selected_items %}
+            <li>{{ item.toode.tootekood }} - {{ item.toode.kirjeldus }}</li>
+        {% endfor %}
+    </ul>
+
+    {{ form.as_p }}
+
+    <button type="submit">Loo töö</button>
+</form>
+
+{% endblock %}

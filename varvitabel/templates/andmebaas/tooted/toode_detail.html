@@ -1,0 +1,13 @@
+<h2>Toote detailid</h2>
+
+<p><strong>Tootekood:</strong> {{ toode.tootekood }}</p>
+<p><strong>Nimi:</strong> {{ toode.nimi }}</p>
+<p><strong>Kirjeldus:</strong> {{ toode.kirjeldus }}</p>
+
+<a href="{% url 'toode_update' toode.pk %}">
+    <button>Muuda</button>
+</a>
+
+<a href="{% url 'tooted' %}">
+    ← Tagasi nimekirja
+</a>

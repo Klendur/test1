@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<h2>Lisa tooted tööle: {{ task }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <ul>
+        {% for item in selected_items %}
+        <li>{{ item.toode.tootekood }} - {{ item.toode.kirjeldus }}</li>
+        {% endfor %}
+    </ul>
+
+    <button type="submit">Lisa tööle</button>
+</form>
+
+{% endblock %}

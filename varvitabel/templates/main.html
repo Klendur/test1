@@ -1,0 +1,679 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>To Do List</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+Warang+Citi&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+        <style>
+
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+            
+
+
+
+
+            body{
+                
+                font-family: "Noto Sans Warang Citi", serif;
+                padding-top: 0px;
+                background-image: url('/static/images/camo1.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: repeat;
+                height: 100vh;  /* Set the height to fill the entire viewport */
+            }
+            
+
+            
+
+        
+
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6{
+                font-family: "Noto Sans Warang Citi", sans-serif;
+                color: azure;
+
+            }
+
+            a,
+            p {
+                color:rgb(0, 197, 141)
+            }
+
+            
+
+            .tabel {
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                display: block;
+                margin: 10%;
+                width: 80%;
+                border-collapse: collapse;
+                margin-top: 10px;
+                padding: 5px;
+                background-color: rgba(255, 255, 255, 0.122);
+                border: 2px solid rgb(44, 44, 44);
+                border-radius: 5px;
+                box-shadow: 5px 5px 0px 0px #8989890f;
+                
+            
+
+            }
+
+            @media (min-width: 100px) {
+                .tabel {
+                    margin-left: 5%;
+                    margin-right: 5%;
+                    margin-bottom: 1%;
+                    width: 90%;
+                }
+            }
+
+            @media (min-width: 1000px) {
+                .tabel {
+                    margin-left: 20%;
+                    margin-right: 20%;
+                    margin-bottom: 1%;
+                    width: 60%;
+                }
+            }        
+
+            .tabeliheader {
+                display: flex;
+                border-bottom: 2px solid #ddd;
+                padding: 1px;
+            }
+
+        
+
+            .tabeliheaderkast {
+                flex: 1;
+                padding-left: 15px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                border-left: solid #9b9b9b;
+                border-width: 7px;
+                min-width: 10%;
+                text-shadow: 0px 0px 5px #000000;
+                letter-spacing: 2px;
+            }
+
+            .peidus-tabeliheaderkast {
+                display: none;
+                flex: 1;
+                padding-left: 15px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                border-left: solid #9b9b9b;
+                border-width: 7px;
+                min-width: 10%;
+                text-shadow: 0px 0px 5px #000000;
+                letter-spacing: 2px;
+            }
+
+            @media (min-width: 1000px) {
+                .peidus-tabeliheaderkast {
+                    display: block;
+                }
+            }
+
+            .tootekood-tabeliheaderkast {
+                padding-left: 15px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                border-left: solid #9b9b9b;
+                border-width: 7px;
+                width: 30%;
+                text-shadow: 0px 0px 5px #000000;
+                letter-spacing: 2px;
+            }
+
+            @media (min-width: 1000px) {
+                .tootekood-tabeliheaderkast {
+                    width: 180px;
+                }
+            }
+
+            .rida {
+                display: flex;
+                border-bottom: 3px solid #0000003f;
+                padding: 1px;
+
+            }
+
+            .rida:hover {
+                background-color: rgba(255, 255, 255, 0.101);
+                color: rgb(255, 255, 255);
+                border-bottom: 3px solid #999999c6;
+            }
+
+            .reakast{
+                flex: 1;
+                padding-left: 15px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                border-left: solid #3e3e3e;
+                border-width: 7px;
+                min-width: 10%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                color: white;
+            }
+
+            .peidus-reakast{
+                display: none;
+                flex: 1;
+                padding-left: 15px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                border-left: solid #3e3e3e;
+                border-width: 7px;
+                min-width: 10%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                color: white;
+            }
+
+            @media (min-width: 1000px) {
+                .peidus-reakast {
+                    display: block;
+                }
+            }
+
+            .tootekood-reakast{
+                padding-left: 15px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                border-left: solid #3e3e3e;
+                border-width: 7px;
+                width: 30%;
+                flex-shrink: 0
+            }
+
+            @media (min-width: 1000px) {
+                .tootekood-reakast {
+                    width: 180px;
+                }
+            }
+
+
+            .dropdown-content {
+                display: none;  /* Hidden by default */
+                position: absolute;
+                background-color: #bdbdbd;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+                border-radius: 5px;
+                text-align: center;
+            }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px;
+                text-decoration: none;
+                display: block;
+                border-width: 0px;
+                
+            }
+
+            .dropdown-content button {
+                width: 90%;
+                margin: 5%;
+                border-width: 0px;
+            }
+
+/* Change color of dropdown items on hover */
+            .dropdown-content a:hover {
+                background-color: #ddd;
+                border-radius: 5px;
+            }
+
+/* Ensure the dropdown menu is positioned correctly */
+            .tootekood-tabeliheaderkast {
+                position: relative;
+            }
+
+/* Optional: Style the h5 to look clickable */
+            .tootekood-tabeliheaderkast h5 {
+                cursor: pointer;
+            }
+
+            .tabeliheaderkast {
+                position: relative;
+            }
+
+/* Optional: Style the h5 to look clickable */
+            .tabeliheaderkast h5 {
+                cursor: pointer;
+            }
+
+            .show-dropdown {
+                display: block;  /* Make the dropdown visible */
+            }
+
+
+
+
+
+            button {
+                padding: 10px 20px;
+                background-color: #00c58d;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            button:hover {
+                background-color: #009e71;
+            }
+
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"] {
+                padding: 3%;
+                border: 2px solid #333;
+                border-radius: 5px;
+                font-size: 16px;
+                background-color: #ffffff24;
+                color: #ffffff;
+                width: 100%;
+                box-sizing: border-box;
+                transition: border-color 0.3s;
+            }
+
+            input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="password"]:focus {
+                border-color: #00c58d; /* Highlight on focus */
+                outline: none;
+            }
+
+
+            input[type="text"]::placeholder,
+            input[type="email"]::placeholder,
+            input[type="password"]::placeholder {
+                color: #323232;  /* Change this to your desired color */
+                font-style: italic;  /* Optional: make the text italic */
+            }
+
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #1c1c1c;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #555;
+                border-radius: 5px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #777;
+            }
+
+            #scrollInput {
+                width: 80px;
+                padding: 8px;
+                font-size: 18px;
+                text-align: center;
+            }
+
+
+            .pagination {
+                display: grid;
+                grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+                align-items: center;
+                gap: 10px;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                width: 80%;
+                border-collapse: collapse;
+                padding: 5px;
+                background-color: rgba(255, 255, 255, 0.122);
+                border: 2px solid rgb(44, 44, 44);
+                border-radius: 5px;
+                box-shadow: 5px 5px 0px 0px #8989890f;
+            }
+
+            .pagination .step-links {
+                display: flex;                        /* Use flex to align links horizontally */
+                justify-content: space-between;
+                grid-column: span 5;               /* Add space between links */
+            }
+
+            .pagination a {
+                padding: 5px 10px;
+                margin: 0;
+                border-left: solid #3e3e3e;
+                border-width: 7px;
+                text-decoration: none;
+                color:rgb(0, 197, 141);
+                border-radius: 0px;
+            }
+
+           .pagination .current {
+                padding: 5px 10px;
+                color:rgb(255, 255, 255);
+                text-align: center;
+            }
+
+            .pagination .disabled {
+                padding: 5px 10px;
+                margin: 0;
+                border-left: solid #3e3e3e00;
+                border-width: 7px;
+                text-decoration: none;
+                color:rgba(255, 255, 255, 0);
+                text-align: center;
+            }
+
+            .pagination a:hover {
+                background-color: rgba(255, 255, 255, 0.101);
+                color: rgb(255, 255, 255);
+            }
+
+
+            @media (min-width: 100px) {
+                .pagination {
+                    margin-left: 5%;
+                    margin-right: 5%;
+                    margin-bottom: 10%;
+                    width: 90%;
+                }
+            }
+
+            @media (min-width: 1000px) {
+                .pagination {
+                    margin-left: 20%;
+                    margin-right: 20%;
+                    margin-bottom: 10%;
+                    width: 60%;
+                }
+            }
+
+
+
+            .navbar{
+                background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(56, 56, 56, 0.44) 40%, rgba(56, 56, 56, 0.44) 60%, rgba(0, 0, 0, 0) 100%);
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                padding-top: 3px;
+                padding-bottom: 6px;
+                padding-left: 20px;
+                padding-right: 20px;
+                margin: 30px 10% 50px 10%;
+                text-decoration: none;
+                box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.134);
+
+            }
+
+            .navdiv{
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+
+            .logo a{
+                font-size: 150%;
+                font-weight: 600;
+                color: #ddd;
+                text-decoration: none
+            }
+
+
+
+
+            .menyykast {
+                display: block;
+                margin-left: 10%;
+                width: 80%;
+                border-collapse: collapse;
+                margin-top: 10px;
+                padding: 5px;
+
+
+            }
+
+            .menyyrida {
+                display: grid;
+                gap: 20px;
+                padding: 20px;
+                align-content: center;
+                justify-content: center;
+
+            }
+
+            .menyyreakast{
+                display: flex;
+                padding-left: 15px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                min-width: 300px;
+                justify-content: center;
+                align-content: center;
+                background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(56, 56, 56, 0.44) 40%, rgba(56, 56, 56, 0.44) 60%, rgba(0, 0, 0, 0) 100%);
+
+
+
+            }
+
+            input::placeholder {
+                color: #6c6c6c;  /* Light gray, change to what you need */
+                opacity: 1;      /* Fully opaque if needed */
+            }
+
+
+
+
+
+
+
+
+
+        </style>
+    </head>
+    <body>
+        
+
+
+        <header>
+            <nav class="navbar">
+                <div class="navdiv">
+                    <div class="menu">&#9776;</div>
+                    <div class="logo"><a href="/">/</a></div>
+                    <div class="logo"><a href="/">{{ view_name }}</a></div>
+                    <div class="logo"><a href="/">/</a></div>
+                    <div><h3 style="transform: rotate(180deg); margin-top: 30%;">&#10150;</h3></div>
+                </div>
+            </nav>
+        </header>
+
+
+
+
+
+        <div class="container">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+
+
+        <footer>
+        </footer>
+
+        <script src="{% static 'js/dropdown.js' %}"></script>
+
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+<!--
+<ul>
+                    <div class="headerkast">
+                        <a href="/">Pealeht</a>
+                    </div>
+                    <div class="headerkast">
+                        <a href="{% url 'taskid' %}">Taskid</a>
+                    </div>
+                    <div class="headerkast">
+                        <a href="{% url 'projektid' %}">Projektid</a>
+                    </div>
+                    <div class="headerkast">
+                        <a href="{% url 'tooted' %}">Tooted</a>
+                    </div>
+                    <div class="headerkast">
+                        <a href="{% url 'taskid' %}">Andmebaas</a>
+                    </div>
+                    
+                </ul>
+
+
+
+<style>
+            body{
+                background-color: gray;
+                font-family: "Noto Sans Warang Citi", serif;
+                padding-top: 50px;
+            }
+
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6{
+                font-family: "Noto Sans Warang Citi", sans-serif;
+
+            }
+
+            a,
+            p {
+                color:deeppink
+            }
+
+
+            
+            .container{
+                max-width: 550px;
+                margin: auto;
+                background-color: #fff;
+            }
+
+            .header-bar{
+                display: flex;
+                justify-content: space-between;
+                color: #fff;
+                padding: 10px;
+                border-radius: 5px 5px 0 0;
+                background: linear-gradient(90deg, #EEA390 0%, #EB796F 43%, #EB796F 100%);
+            }
+
+            .header-bar a{
+                color:#fff;
+                text-decoration: none;
+            }
+
+            .task-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px;
+                background-color: #fff;
+                border-top: 1px solid rgb(226, 226, 226);
+            }
+
+            .task-title {
+                display: flex;
+            }
+
+            .task-title a {
+                text-decoration: none;
+                color: gray;
+                margin-left: 10px;
+            }
+
+            .task-complete-icon {
+                height: 20px;
+                width: 20px;
+                background-color: greenyellow;
+                border-radius: 50%;
+                border: 1px solid #000
+            }
+
+            .task-incomplete-icon {
+                height: 20px;
+                width: 20px;
+                background-color: red;
+                border-radius: 50%;
+                border: 1px solid #000;
+            }
+
+            .delete-link {
+                color: rgb(255, 0, 0);
+                text-decoration: none;
+                font-size: 22px;
+                font-weight: 900;
+                line-height: 0;
+            }
+
+            .navbar{
+                background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(56, 56, 56, 0.44) 40%, rgba(56, 56, 56, 0.44) 60%, rgba(0, 0, 0, 0) 100%);
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                padding-top: 3px;
+                padding-bottom: 6px;
+                padding-left: 20px;
+                padding-right: 20px;
+                margin: 30px 10% 50px 10%;
+                text-decoration: none;
+                box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.134);
+
+            }
+
+            .navdiv{
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+
+            .logo a{
+                font-size: 35px;
+                font-weight: 600;
+                color: #ddd;
+                text-decoration: none

@@ -1,0 +1,67 @@
+
+{% extends 'main.html' %}
+{% block content %}
+
+
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="tabel">
+        <div class="tabeliheader">
+            <div class="tootekood-tabeliheaderkast"><h5>Vali</h5></div>
+            <div class="peidus-tabeliheaderkast"><h5>Tootekood</h5></div>
+            <div class="peidus-tabeliheaderkast"><h5>Projekt</h5></div>
+            <div class="peidus-tabeliheaderkast"><h5>Kirjeldus</h5></div>
+        </div>
+
+        {% for item, form in forms %}
+        <div class="rida">
+            <div class="tootekood-reakast">
+                {{ form.selected }}
+            </div>
+            <div class="peidus-reakast">
+                <a>{{ item.toode.tootekood }}</a>
+            </div>
+            <div class="peidus-reakast">
+                <a>{{ item.projekt1.projekt }}</a>
+            </div>
+            <div class="peidus-reakast">
+                <a>{{ item.toode.kirjeldus }}</a>
+            </div>
+        </div>
+        {% empty %}
+        <h3>Tooteid pole</h3>
+        {% endfor %}
+    </div>
+
+    <div style="margin-top: 20px; text-align: center;">
+        <button type="submit">Järgmine</button>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}

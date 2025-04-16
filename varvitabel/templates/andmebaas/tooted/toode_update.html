@@ -1,0 +1,11 @@
+<h2>Muuda toodet</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvesta</button>
+</form>
+
+<a href="{% url 'toode_detail' toode.pk %}">
+    ← Tagasi detailvaatesse
+</a>

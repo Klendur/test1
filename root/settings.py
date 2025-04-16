@@ -17,6 +17,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Static files will be collected from this directory
 STATICFILES_DIRS = [
     BASE_DIR / 'varvitabel' / 'static',  # Make sure this directory exists
+    BASE_DIR / 'static',
+    BASE_DIR / 'staticfiles',
 ]
 
 # This is where the collected static files will be stored

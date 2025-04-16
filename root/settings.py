@@ -11,21 +11,15 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 from pathlib import Path
 
-# Base directory path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Static files will be collected from this directory
 STATICFILES_DIRS = [
-    BASE_DIR / 'varvitabel' / 'static',  # Make sure this directory exists
-    BASE_DIR / 'static',
-    BASE_DIR / 'staticfiles',
+    BASE_DIR / 'varvitabel' / 'static',
 ]
 
-# This is where the collected static files will be stored
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Use pathlib for consistency
-
-# URL to access static files
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles' 
+
 
 
 

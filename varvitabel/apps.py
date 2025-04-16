@@ -8,7 +8,6 @@ class VarvitabelConfig(AppConfig):
 
 
 
-from django.contrib.auth.models import User
 import logging
 
 class VarvitabelConfig(AppConfig):

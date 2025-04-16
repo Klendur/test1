@@ -16,15 +16,10 @@ class VarvitabelConfig(AppConfig):
     name = 'varvitabel'
 
     def ready(self):
-        try:
-            if not User.objects.filter(username='admin').exists():
-                User.objects.create_superuser(
-                    username='admin',
-                    email='admin@example.com',
-                    password='admin123'  # You can change this
-                )
-                logging.info("✅ Superuser 'admin' created.")
-            else:
-                logging.info("ℹ️ Superuser 'admin' already exists.")
-        except Exception as e:
-            logging.error(f"❌ Error creating superuser: {e}")
+        from django.contrib.auth.models import User  # ✅ move import here
+        if not User.objects.filter(username='admin').exists():
+            User.objects.create_superuser(
+                username='admin',
+                email='admin@example.com',
+                password='admin'
+            )

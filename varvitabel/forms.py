@@ -1,7 +1,9 @@
 from django import forms
 from django.forms import modelformset_factory
-from .models import komplekteeri, projektivaade, task
+from .models import komplekteeri, projektivaade, task, projektid
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class komplekteerikogus(forms.ModelForm):
@@ -19,6 +21,7 @@ class projektivaadeform(forms.ModelForm):
 
 
     checkbox = forms.IntegerField(initial=0)
+
 
 
 class CreateTaskForm(forms.Form):
@@ -50,6 +53,13 @@ class ExcelUploadForm(forms.Form):
 
 
 
+class CreateProjectForm(forms.ModelForm):
+    class Meta:
+        model = projektid
+        fields = ['projekt', 'staatus']
+
+
+
 
 '''
 KogusFormSet = modelformset_factory(
@@ -65,7 +75,7 @@ KogusFormSet = modelformset_factory(
 
 
 
-from django.contrib.auth.forms import AuthenticationForm
+
 
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
@@ -88,7 +98,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 
 
-from django.contrib.auth.forms import UserCreationForm
+
 
 class CreateUserForm(UserCreationForm):
     email = forms.EmailField(required=True)

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import toode, projektid, mainvarvitabel, komplekteeri, task, projektivaade
 from django.views.generic.list import ListView
 from django.views.generic import UpdateView, DetailView, DeleteView
-from .forms import komplekteerikogus, ExcelUploadForm, projektivaadeform, TaskSelectorForm, SelectionForm
+from .forms import komplekteerikogus, ExcelUploadForm, projektivaadeform, TaskSelectorForm, SelectionForm, CreateProjectForm
 from django.views import View
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect, HttpResponse
@@ -122,7 +122,17 @@ class projektitabel(ListView):
         context = super().get_context_data(**kwargs)
         context['view_name'] = 'Projektid'
         return context
+    
+def createprojekt(request):
+    if request.method == 'POST':
+        form = CreateProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('projektid')
+    else:
+        form = CreateProjectForm()
 
+    return render(request, 'andmebaas/projektid/create_projekt.html', {'form': form})
 
 
 
@@ -179,7 +189,7 @@ class projektivalik(ListView):
         context['view_name'] = 'Projektivalik'
         return context
 
-from django.shortcuts import redirect
+
 
 def projektivaadeview(request):
     projekt = request.GET.get('projekt')
@@ -285,7 +295,6 @@ def create_task_form_view(request):
         'selected_items': selected_items
     })
 
-
 def add_products_to_task_view(request):
     task_id = request.session.get('selected_task')
     selected_ids = request.session.get('selected_items', [])
@@ -315,6 +324,13 @@ def add_products_to_task_view(request):
         'selected_items': selected_items,
         'task': task_instance
     })
+
+
+
+
+
+
+
 
 """
     

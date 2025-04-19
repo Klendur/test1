@@ -14,6 +14,7 @@ urlpatterns = [
     path('toode/<int:pk>/edit/', views.toodeupdate.as_view(), name='toode_update'),
 
     path('projektid', views.projektitabel.as_view(), name='projektid'),
+    path('create-projekt/', views.createprojekt, name='create-projekt'),
     
     path('taskid', views.taskitabel.as_view(), name='taskid'),
     path('view_komplekteeritudkogus/', views.view_komplekteeritudkogus, name='view_komplekteeritudkogus'),

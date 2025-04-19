@@ -10,13 +10,21 @@
 </form>
 -->
 
+<div class="nupud">
+    <div class="nupp">
+        <a href="{% url 'export_to_excel' %}">
+            <button type="button">📤 Ekspordi Excelina</button>
+        </a>
+    </div>
+    <div class="nupp">
+        <a href="{% url 'upload_excel' %}">
+            <button type="button">📤 Impordi excel</button>
+        </a>
+    </div>
+</div>
 
-<a href="{% url 'export_to_excel' %}">
-    <button type="button">📤 Ekspordi Excelina</button>
-</a>
-<a href="{% url 'upload_excel' %}">
-    <button type="button">📤 Impordi excel</button>
-</a>
+
+
 
 <div class="tabel">
     <div class="tabeliheader">
